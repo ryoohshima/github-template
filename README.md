@@ -75,3 +75,4 @@ printf '%s' "$TOKEN" | gh secret set CLAUDE_CODE_OAUTH_TOKEN --repo <owner>/<rep
 - スタック非依存で汎用的なものに限定（CI 本体は雛形のみ）
 - 規約は [`claude-code/rules/git-guideline.md`](https://github.com/Ryo-Ohshima/claude-code) のコミットプレフィックスと整合
 - すべてのテンプレ・メッセージは日本語
+
