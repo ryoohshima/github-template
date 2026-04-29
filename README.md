@@ -48,6 +48,7 @@ gh repo create <new-repo-name> --template Ryo-Ohshima/github-template --private
 - [ ] **`CODEOWNERS`** のユーザー名を必要に応じて変更
 - [ ] **`ci.yml.example`** を `ci.yml` にリネームし、プロジェクトのスクリプト構成に合わせて調整。Node.js 以外のスタックなら丸ごと置き換え
 - [ ] **`claude.yml`** を使う場合は Repository Secret に `CLAUDE_CODE_OAUTH_TOKEN` を設定
+- [ ] **`claude.yml`** を使う場合は `Settings → Actions → General → Workflow permissions` で **`Allow GitHub Actions to create and approve pull requests`** を有効化（オフのままだと Claude が PR 作成段階で `GitHub Actions is not permitted to create or approve pull requests` で失敗する）
 - [ ] **`dependabot.yml`** で該当しないエコシステムのブロックを削除（例: TS リポなら github-actions のみ残す）
 - [ ] **`release.yml`** のラベルが PR ラベル運用と整合しているか確認
 - [ ] **`CLAUDE.md`** にプロジェクト固有の概要・スタック・開発コマンドを記述
@@ -55,7 +56,9 @@ gh repo create <new-repo-name> --template Ryo-Ohshima/github-template --private
 
 ## `claude.yml` がエラーになるとき
 
-`Error: ... Invalid API key · Fix external API key` で失敗する場合、原因は主に 2 つ：
+### `Invalid API key · Fix external API key`
+
+原因は主に 2 つ：
 
 1. **input 名の取り違え** — OAuth トークンは `claude_code_oauth_token:` input、API キーは `anthropic_api_key:` input に渡す必要がある（混同すると Anthropic 側で拒否される）
 2. **secret 値の改行混入・期限切れ** — secret 設定時に `echo` を使うと末尾改行が混入することがある
@@ -68,7 +71,15 @@ TOKEN='sk-ant-oat01-...'
 printf '%s' "$TOKEN" | gh secret set CLAUDE_CODE_OAUTH_TOKEN --repo <owner>/<repo>
 ```
 
-`echo` ではなく `printf '%s'` を使うのがコツ（末尾改行を防ぐ）。動作確認は Issue で `@claude ping` をコメントし、`Actions` タブで workflow run の成功を確認する。
+`echo` ではなく `printf '%s'` を使うのがコツ（末尾改行を防ぐ）。
+
+### `GitHub Actions is not permitted to create or approve pull requests`
+
+Claude が変更を push した後の `gh pr create --draft` 段階で出る。`Settings → Actions → General → Workflow permissions` で **`Allow GitHub Actions to create and approve pull requests`** を有効化する。リポ作成直後はオフなので、新規リポでは必ず最初に有効化が必要。
+
+### 動作確認
+
+Issue で `@claude ping` をコメントし、`Actions` タブで workflow run の成功と Draft PR が作成されることを確認する。
 
 ## 設計方針
 
