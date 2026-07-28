@@ -48,6 +48,10 @@ jobs:
           #
           # Let Claude run the verification commands before pushing.
           # These are merged into tag mode's built-in tools, not a replacement for them.
-          # Adjust the package manager to match the project (npm / yarn / cargo / go ...).
-          claude_args: '--allowed-tools "Bash(pnpm:*)"'
+          #
+          # Each command is allowlisted exactly. Avoid a wildcard such as `Bash(pnpm:*)`:
+          # it would also permit `pnpm exec` / `pnpm dlx` / `pnpm run <any script>`,
+          # which is arbitrary code execution under a `contents: write` token.
+          # Adjust the commands to match the project (npm / yarn / cargo / go ...).
+          claude_args: '--allowed-tools "Bash(pnpm lint)" "Bash(pnpm typecheck)" "Bash(pnpm test)"'
 
