@@ -28,8 +28,9 @@ gh repo create <new-repo-name> --template Ryo-Ohshima/github-template --private
 | `.github/CODEOWNERS` | PR レビュー自動割り当て（初期値 `@Ryo-Ohshima`） |
 | `.github/release.yml` | リリースノート自動カテゴリ分類（コミット規約整合） |
 | `.github/dependabot.yml` | npm + github-actions 週次自動更新 |
-| `.github/workflows/claude.yml` | `@claude` メンションで Claude Code を起動 |
-| `.github/workflows/stale.yml` | 30 日無活動 Issue/PR を自動クローズ |
+| `.github/workflows/claude.yml` | `@claude` メンションで Claude Code を起動（fork PR ガード付き、作業ブランチへは Draft PR を自動作成） |
+| `.github/workflows/claude-code-review.yml` | PR 作成・更新時に Claude Code が自動レビュー（dependabot PR は対象外） |
+| `.github/workflows/stale.yml` | 30 日無活動 PR を自動クローズ（Issue は対象外） |
 | `.github/workflows/ci.yml.example` | Node.js 用 CI 雛形（リネーム+調整して使用） |
 
 ### ルート直下（リポジトリ全体の足場）
