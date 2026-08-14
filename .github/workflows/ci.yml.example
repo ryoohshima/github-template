@@ -34,6 +34,7 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Biome 採用時は package.json に "lint": "biome check ." を定義（ルートの biome.jsonc 参照）
       - run: pnpm lint
 
   typecheck:
