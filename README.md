@@ -40,6 +40,7 @@ gh repo create <new-repo-name> --template Ryo-Ohshima/github-template --private
 | `.gitignore` | macOS / IDE / .env / node_modules / dist / ログ等を網羅した汎用版 |
 | `.editorconfig` | エディタ間のインデント・改行・文字コード統一 |
 | `.gitattributes` | 改行コード LF 正規化、バイナリ判定 |
+| `biome.jsonc` | Biome（linter + formatter）設定雛形。JS/TS 以外のスタックなら削除 |
 | `CLAUDE.md` | プロジェクト個別の Claude Code 指示雛形（global CLAUDE.md を補完） |
 | `tasks/` | Claude Code 作業記録用ディレクトリ（todo.md / lessons.md 配置先） |
 | `.claude/settings.json` | プロジェクト個別の permission allowlist 雛形 |
@@ -54,6 +55,7 @@ gh repo create <new-repo-name> --template Ryo-Ohshima/github-template --private
 - [ ] **`release.yml`** のラベルが PR ラベル運用と整合しているか確認
 - [ ] **`CLAUDE.md`** にプロジェクト固有の概要・スタック・開発コマンドを記述
 - [ ] **`.gitignore`** にスタック固有のパターン（`*.env.production`, ビルド成果物名など）を追記
+- [ ] **`biome.jsonc`** を使う場合は `pnpm add -D @biomejs/biome` し、package.json に `"lint": "biome check ."` を定義。JS/TS 以外のスタックなら削除
 
 ## `claude.yml` がエラーになるとき
 
