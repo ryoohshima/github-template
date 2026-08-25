@@ -1,0 +1,12 @@
+# git worktree 作成時に、.gitignore 対象でもコピーしたいファイル
+# 書式は .gitignore と同じ（gitignore 形式のパターン）
+
+# ローカル環境変数
+.env
+.env.local
+.env.*.local
+
+# ローカル設定
+.claude/settings.local.json
+
+# node_modules/ 等の依存は入れない（worktree 側で再インストールする方が速く安全）
