@@ -38,6 +38,7 @@ gh repo create <new-repo-name> --template Ryo-Ohshima/github-template --private
 | パス | 用途 |
 |---|---|
 | `.gitignore` | macOS / IDE / .env / node_modules / dist / ログ等を網羅した汎用版 |
+| `.worktreeinclude` | `git worktree` 作成時に `.gitignore` 対象でもコピーするファイルの指定（Claude Code が参照） |
 | `.editorconfig` | エディタ間のインデント・改行・文字コード統一 |
 | `.gitattributes` | 改行コード LF 正規化、バイナリ判定 |
 | `biome.jsonc` | Biome（linter + formatter）設定雛形。JS/TS 以外のスタックなら削除 |
