@@ -25,6 +25,8 @@ pnpm-debug.log*
 .env.local
 .env.*.local
 !.env.example
+.dev.vars*
+!.dev.vars.example
 
 # 依存関係（主要なもの）
 node_modules/
@@ -45,11 +47,19 @@ coverage/
 .nuxt/
 .turbo/
 .parcel-cache/
+.astro/
+.output/
+.wrangler/
+*.tsbuildinfo
 
 # テスト
 .nyc_output/
+.pytest_cache/
 
 # 一時ファイル
 *.tmp
 .tmp/
 tmp/
+
+# ツール生成物
+.codegraph/
