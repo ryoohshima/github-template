@@ -31,6 +31,7 @@ gh repo create <new-repo-name> --template Ryo-Ohshima/github-template --private
 | `.github/workflows/stale.yml` | 30 日無活動 PR を自動クローズ（Issue は対象外） |
 | `.github/workflows/ci.yml.example` | Node.js 用 CI 雛形（lint / typecheck / test / build。リネーム+調整して使用） |
 | `.github/workflows/dependabot-auto-merge.yml.example` | 必須 CI 通過済みの Dependabot PR（manifest / lockfile / workflow のみ）を自動 squash マージする雛形 |
+| `.github/workflows/codex-review.yml.example` | PR 作成・更新時に Codex が読み取り専用で差分をレビューしコメント（Draft / Dependabot PR は対象外） |
 
 ### ルート直下（リポジトリ全体の足場）
 
@@ -47,6 +48,7 @@ gh repo create <new-repo-name> --template Ryo-Ohshima/github-template --private
 - [ ] **`CODEOWNERS`** のユーザー名を必要に応じて変更
 - [ ] **`ci.yml.example`** を `ci.yml` にリネームし、プロジェクトのスクリプト構成に合わせて調整。Node.js 以外のスタックなら丸ごと置き換え
 - [ ] **`dependabot-auto-merge.yml.example`** を使う場合は `ci.yml` 有効化後にリネームし、`REQUIRED_CHECKS` を CI のジョブ名に合わせる。初回は `dry_run` で手動実行して確認
+- [ ] **`codex-review.yml.example`** を使う場合は Repository Secret に `OPENAI_API_KEY` を設定してリネーム
 - [ ] **`dependabot.yml`** で該当しないエコシステムのブロックを削除（例: TS リポなら github-actions のみ残す）
 - [ ] **`release.yml`** のラベルが PR ラベル運用と整合しているか確認
 - [ ] **`.gitignore`** にスタック固有のパターン（`*.env.production`, ビルド成果物名など）を追記
